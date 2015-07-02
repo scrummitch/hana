@@ -20,20 +20,26 @@ error_reporting(E_ALL);
 $vendor_path = '../vendor/';
 
 $paths = array(
+
+	/**
+   * Base path of the project
+   */
+  'ROOTPATH' => '../',
+
 	/**
 	 * The directory in which your application specific resources are located.
 	 * The application directory must contain the bootstrap.php file.
 	 *
 	 * @link http://kohanaframework.org/guide/about.install#application
 	 */
-	'APPPATH' => '../application',
+	'APPPATH' => '../app',
 
 	/**
 	 * The directory in which your modules are located.
 	 *
 	 * @link http://kohanaframework.org/guide/about.install#modules
 	 */
-	'MODPATH' => '../modules',
+	'MODPATH' => $vendor_path,
 
 	/**
 	 * The directory in which the Kohana resources are located. The system
@@ -42,6 +48,11 @@ $paths = array(
 	 * @link http://kohanaframework.org/guide/about.install#system
 	 */
 	'SYSPATH' => $vendor_path.'kohana/core',
+
+	/**
+	 * Vendor Path, where all composer modules are stored
+	 */
+	'VENDORPATH' => $vendor_path,
 );
 
 /**
@@ -70,7 +81,7 @@ foreach ($paths as $key => $path)
 	{
 		$path = DOCROOT.$path;
 	}
-	
+
 	// Define the absolute path
 	define($key, realpath($path).DIRECTORY_SEPARATOR);
 }
@@ -117,11 +128,17 @@ if (PHP_SAPI == 'cli')
 }
 else
 {
+	$is_secure = (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+    AND $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'
+    AND isset($_SERVER['HTTP_CF_VISITOR'])
+    AND strpos($_SERVER['HTTP_CF_VISITOR'], 'https'));
+
 	/**
 	 * Execute the main request. A source of the URI can be passed, eg: $_SERVER['PATH_INFO'].
 	 * If no source is specified, the URI will be automatically detected.
 	 */
 	echo Request::factory(TRUE, array(), FALSE)
+		->secure($is_secure)
 		->execute()
 		->send_headers(TRUE)
 		->body();

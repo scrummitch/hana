@@ -1,21 +1,19 @@
 {
-	"name": "kohana/kohana",
-	"description": "Kohana framework application skeleton",
-	"homepage": "http://kohanaframework.org",
+	"name": "scrummitch/hana",
+	"description": "Hana framework",
+	"homepage": "https://github.com/scrummitch/hana",
 	"license": "BSD-3-Clause",
 	"authors": [
 		{
-			"name": "Kohana Team",
-			"email": "team@kohanaframework.org",
-			"homepage": "http://kohanaframework.org/team",
+			"name": "scrummitch",
+			"email": "mitch@des.sk",
+			"homepage": "mitch@des.sk",
 			"role": "developer"
 		}
 	],
 	"support": {
-		"issues": "https://github.com/kohana/kohana/issues",
-		"forum": "http://discourse.kohanaframework.org",
-		"irc": "irc://irc.freenode.net/kohana",
-		"source": "http://github.com/kohana/kohana"
+		"issues": "https://github.com/scrummitch/hana/issues",
+		"source": "https://github.com/scrummitch/hana"
 	},
 	"require": {
 		"php": ">=5.4.0",
